@@ -62,7 +62,11 @@ request = requests.get(
 )
 
 if request.status_code == 200:
+    print("Connection successful...\nEnter '-r' to run the program, '-v' to view the webpage or '-q' to quit.")
     running = True
+else:
+    #TODO: add specific errors and solutions
+    print("Trouble connecting, try again...") 
 
 session = requests.Session()
 session.auth = HTTPBasicAuth(username, password)
