@@ -57,16 +57,17 @@ sync_time_payload = {
     "btOK": "submit",
 }
 
-request = requests.get(
+try:
+    print("Testing connection...")
+    request = requests.get(
     url=url, auth=HTTPBasicAuth(username=username, password=password)
-)
+    )
 
-if request.status_code == 200:
-    print("Connection successful...\nEnter '-r' to run the program, '-v' to view the webpage or '-q' to quit.")
-    running = True
-else:
-    #TODO: add specific errors and solutions
-    print("Trouble connecting, try again...") 
+    if request.status_code == 200:
+        print("Connection successful...\nEnter '-r' to run the program, '-v' to view the webpage or '-q' to quit.")
+        running = True
+except requests.exceptions.RequestException as e:
+    raise SystemExit(e) 
 
 session = requests.Session()
 session.auth = HTTPBasicAuth(username, password)
